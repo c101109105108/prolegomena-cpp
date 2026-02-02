@@ -2,9 +2,27 @@
 #include <cstdlib> 
 #include <string>
 
-int main()
+double calculatevoltage(double current, double resistance) {
+	return current * resistance;
+}
 
-{
+double calculatecurrent(double voltage, double resistance) {
+	return voltage / resistance;
+}
+
+double calculateresistance(double voltage, double current) {
+	return voltage / current;
+}
+
+double calculatepower(double voltage, double current) {
+	return voltage * current;
+}
+
+void clearscreen() {
+	std::cout << "\033[2J\033[H" << std::flush;
+}
+
+int main() {
 
 	bool keepRunning = true;
 	std::string userInput;
@@ -24,8 +42,7 @@ int main()
 		std::cout << "\n";
 		std::cin >> choice;
 
-
-		system("cls");
+		clearscreen();
 
 		if (choice == 1) {
 
@@ -36,21 +53,18 @@ int main()
 			std::cin >> choice2;
 
 
-			system("cls");
-
+			clearscreen();
 			if (choice2 == 1) {
 
-				std::cout << "Enter Current (Amps): ";
+				std::cout << "Enter Current (A): ";
 				std::cin >> current;
 
 				std::cout << "Enter Resistance (ohms): ";
 				std::cin >> resistance;
 
-				voltage = current * resistance;
-
-				std::cout << "Calculated Voltage is: " << voltage << "V" << '\n';
+				double result = calculatevoltage(current, resistance);
+				std::cout << "Voltage is: " << result << " V" << '\n';
 			}
-
 
 			else if (choice2 == 2) {
 
@@ -60,9 +74,8 @@ int main()
 				std::cout << "Enter Resistance (ohms): ";
 				std::cin >> resistance;
 
-				current = voltage / resistance;
-
-				std::cout << "Calculated Current is: " << current << "A" << '\n';
+				double result = calculatecurrent(voltage, resistance);
+				std::cout << "Calculated Current is: " << result << " A" << '\n';
 			}
 
 			else if (choice2 == 3) {
@@ -73,9 +86,8 @@ int main()
 				std::cout << "Enter Current (A): ";
 				std::cin >> current;
 
-				resistance = voltage / current;
-
-				std::cout << "Calculated Resistance is: " << resistance << " ohms" << '\n';
+				double result = calculateresistance(voltage, current);
+				std::cout << "Calculated Resistance is: " << result << " ohms" << '\n';
 
 			}
 
@@ -93,9 +105,8 @@ int main()
 			std::cout << "Enter Current (A): ";
 			std::cin >> current;
 
-			power = voltage * current;
-
-			std::cout << "Calculated Power is: " << power << " W" << '\n';
+			double result = calculatepower(voltage, current);
+			std::cout << "Calculated Power is: " << result << " W" << '\n';
 		}
 
 		std::cout << "\nWould you like to continue? (Yes or No): ";
@@ -103,7 +114,7 @@ int main()
 
 		if (userInput == "yes" || userInput == "y" || userInput == "Yes" || userInput == "YES") {
 			keepRunning = true;
-			system("cls");
+			clearscreen();
 		}
 		else if (userInput == "no" || userInput == "n" || userInput == "No" || userInput == "NO") {
 			keepRunning = false;
@@ -116,5 +127,4 @@ int main()
 
 	} while (keepRunning);
 	return 0;
-
 }
