@@ -3,30 +3,28 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
-double calculatevoltage(double current, double resistance) {
-	return current * resistance;
+double calculate_voltage(double i, double r) {
+	return i * r;
 }
 
-double calculatecurrent(double voltage, double resistance) {
-	return voltage / resistance;
+double calculate_current(double v, double r) {
+	return v / r;
 }
 
-double calculateresistance(double voltage, double current) {
-	return voltage / current;
+double calculate_resistance(double v, double i) {
+	return v / i;
 }
 
-double calculatepower(double voltage, double current) {
-	return voltage * current;
+double calculate_power(double v, double i) {
+	return v * i;
 }
 
-double calculatepowervvr(double voltage, double resistance) {
-	return (voltage * voltage) / resistance;
+double calculate_power_from_voltage_resistance(double v, double r) {
+	return (v * v) / r;
 }
 
-double calculatepoweraar(double current, double resistance) {
-	return (current * current) * resistance;
+double calculate_power_from_current_resistance(double i, double r) {
+	return (i * i) * r;
 }
 
 void clearscreen() {
@@ -35,7 +33,7 @@ void clearscreen() {
 
 int main() {
 
-	vector<double> history;
+	std::vector<double> history;
 
 	bool keepRunning = true;
 	std::string userInput;
@@ -45,10 +43,10 @@ int main() {
 		int choice2;
 		int choice3;
 
-		double resistance;
-		double current;
-		double voltage;
-		double power;
+		double r;
+		double i;
+		double v;
+		double p;
 
 		std::cout << "1. Ohm's Law Calculator\n";
 		std::cout << "\n2. Power Calculator\n";
@@ -71,12 +69,12 @@ int main() {
 			if (choice2 == 1) {
 
 				std::cout << "Enter Current (A): ";
-				std::cin >> current;
+				std::cin >> i;
 
 				std::cout << "Enter Resistance (ohms): ";
-				std::cin >> resistance;
+				std::cin >> r;
 
-				double result = calculatevoltage(current, resistance);
+				double result = calculate_voltage(i, r);
 				std::cout << "Voltage is: " << result << " V" << '\n';
 				history.push_back(result);
 			}
@@ -84,12 +82,12 @@ int main() {
 			else if (choice2 == 2) {
 
 				std::cout << "Enter Voltage (V): ";
-				std::cin >> voltage;
+				std::cin >> v;
 
 				std::cout << "Enter Resistance (ohms): ";
-				std::cin >> resistance;
+				std::cin >> r;
 
-				double result = calculatecurrent(voltage, resistance);
+				double result = calculate_current(v, r);
 				std::cout << "Calculated Current is: " << result << " A";
 				history.push_back(result);
 			}
@@ -97,12 +95,12 @@ int main() {
 			else if (choice2 == 3) {
 
 				std::cout << "Enter Voltage (V): ";
-				std::cin >> voltage;
+				std::cin >> v;
 
 				std::cout << "Enter Current (A): ";
-				std::cin >> current;
+				std::cin >> i;
 
-				double result = calculateresistance(voltage, current);
+				double result = calculate_resistance(v, i);
 				std::cout << "Calculated Resistance is: " << result << " ohms" << '\n';
 				history.push_back(result);
 
@@ -126,12 +124,12 @@ int main() {
 				clearscreen();
 
 				std::cout << "Enter Voltage (V): ";
-				std::cin >> voltage;
+				std::cin >> v;
 
 				std::cout << "Enter Resistance (ohms): ";
-				std::cin >> resistance;
+				std::cin >> r;
 
-				double result = calculatepowervvr(voltage, resistance);
+				double result = calculate_power_from_voltage_resistance(v, r);
 				std::cout << "Power is: " << result << " W";
 				history.push_back(result);
 			}
@@ -141,12 +139,12 @@ int main() {
 				clearscreen();
 
 				std::cout << "Enter Current (A): ";
-				std::cin >> current;
+				std::cin >> i;
 
 				std::cout << "Enter Resistance (ohms): ";
-				std::cin >> resistance;
+				std::cin >> r;
 
-				double result = calculatepoweraar(current, resistance);
+				double result = calculate_power_from_current_resistance(i, r);
 				std::cout << "Power is: " << result << " W" << '\n';
 				history.push_back(result);
 
@@ -156,12 +154,12 @@ int main() {
 				clearscreen();
 
 				std::cout << "Enter Voltage (V): ";
-				std::cin >> voltage;
+				std::cin >> v;
 
 				std::cout << "Enter Current (A): ";
-				std::cin >> current;
+				std::cin >> i;
 
-				double result = calculatepower(voltage, current);
+				double result = calculate_power(v, i);
 				std::cout << "Power is: " << result << " W";
 				history.push_back(result);
 			}
