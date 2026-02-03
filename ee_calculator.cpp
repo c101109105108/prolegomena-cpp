@@ -51,8 +51,10 @@ int main() {
 		std::cout << "1. Ohm's Law Calculator\n";
 		std::cout << "\n2. Power Calculator\n";
 		std::cout << "\n3. View History\n";
+		std::cout << "\n4. Exit\n";
 		std::cout << "\n";
 		std::cin >> choice;
+
 
 		clearscreen();
 
@@ -107,6 +109,7 @@ int main() {
 			}
 
 			else {
+				clearscreen();
 				std::cout << "Invalid Input.\n";
 			}
 
@@ -117,6 +120,7 @@ int main() {
 			std::cout << "1. Using Voltage and Resistance [V^2 / R] " << '\n';
 			std::cout << "\n2. Using Current and Resistance [I^2 * R] " << '\n';
 			std::cout << "\n3. Using Voltage and Current [V * I]" << '\n';
+			std::cout << "\n";
 			std::cin >> choice3;
 
 			if (choice3 == 1) {
@@ -163,19 +167,36 @@ int main() {
 				std::cout << "Power is: " << result << " W";
 				history.push_back(result);
 			}
+
+			else {
+				clearscreen();
+				std::cout << "Invalid Input.\n";
+			}
+
 		}
 		else if (choice == 3) {
 			std::cout << "--- Calculation History ---" << '\n';
 			if (history.empty()) {
-				std::cout << "\nNo history yet :3\n";
+				clearscreen();
+				std::cout << "No history yet :3\n";
 			}
 			else {
 				for (double n : history) {
 					std::cout << n << '\n';
 				}
 			}
+
+		}
+		else if (choice == 4) {
+			keepRunning = false;
+			std::cout << "Bye!" << '\n';
+			break;
 		}
 
+		else {
+			clearscreen();
+			std::cout << "Invalid Input.\n";
+		}
 
 		std::cout << "\nWould you like to continue? (Yes or No): ";
 		std::cin >> userInput;
@@ -187,10 +208,6 @@ int main() {
 		else if (userInput == "no" || userInput == "n" || userInput == "No" || userInput == "NO") {
 			keepRunning = false;
 			std::cout << "Bye!\n";
-		}
-
-		else {
-			std::cout << "Invalid Input.\n";
 		}
 
 	} while (keepRunning);
