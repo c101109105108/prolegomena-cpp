@@ -31,13 +31,16 @@ int main() {
 			std::cout << "---ENCRYPTION TERMINAL--" << '\n';
 			std::cout << "------------------------" << '\n';
 			std::cout << "\nPassword:";
-			std::cin >> password;
+			std::cin.ignore();
+			std::getline(std::cin, password);
 			std::cout << "\nSecret Key:";
 
 			std::cin >> key;
 
 			for (int i = 0; i < password.length(); i++) {
-				password[i] = password[i] + key;
+				if (password[i] != ' ') {
+					password[i] = password[i] + key;
+				}
 			}
 			std::cout << "\nEncrypted Password: " <<password;
 
@@ -50,12 +53,15 @@ int main() {
 			std::cout << "---DECRYPTION TERMINAL--" << '\n';
 			std::cout << "------------------------" << '\n';
 			std::cout << '\n' << "Encrypted Password:";
-			std::cin >> password;
+			std::cin.ignore();
+			std::getline(std::cin, password);
 			std::cout << "\nSecret Key:";
 			std::cin >> key;
 
 			for (int i = 0; i < password.length(); i++) {
-				password[i] = password[i] - key;
+				if (password[i] != ' ') {
+					password[i] = password[i] - key;
+				}
 			}
 
 			std::cout << "\nDecrypted Password:" <<password;
