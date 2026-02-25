@@ -13,7 +13,7 @@ int main() {
 
     cv::namedWindow("Argus X-1 Vision: Color Calibration");
     cv::createTrackbar("Hue Min", "Argus X-1 Vision: Color Calibration", &min_hue, 179);
-    cv::createTrackbar("Hue Max", "Argus X-1 Vision: Color Calibration", &max_hue, 179); // max 179?
+    cv::createTrackbar("Hue Max", "Argus X-1 Vision: Color Calibration", &max_hue, 179); 
     cv::createTrackbar("Sat Min", "Argus X-1 Vision: Color Calibration", &min_saturation, 255);
     cv::createTrackbar("Sat Max", "Argus X-1 Vision: Color Calibration", &max_saturation, 255);
     cv::createTrackbar("Val Min", "Argus X-1 Vision: Color Calibration", &min_value, 255);
@@ -38,14 +38,18 @@ int main() {
         cv::inRange(webcam_hsv, lower_orange, upper_orange, webcam_binary_mask);
         cv::Moments m = cv::moments(webcam_binary_mask, true);
 
-        if (m.m00 > 200) { // 200 kinda good to filter noise, test more
+        if (m.m00 > 150) { 
 
-            target_x = m.m10 / m.m00; // m00 = number of white pixels -- m10 = sum of x positions of white pixels -- m01 = sum of y positions of white pixels
+            target_x = m.m10 / m.m00; 
             target_y = m.m01 / m.m00;
 
             cv::circle(webcam_main, cv::Point(target_x, target_y), 4, cv::Scalar(0, 0, 255), -1);
 
-            std::cout << "TARGET DETECTED AT -> X: " << target_x << " | Y: " << target_y << '\n'; // https://www.reddit.com/r/cpp_questions/comments/13i1282/stdendl_or_n/
+            std::cout << "TARGET DETECTED AT -> X: " << target_x << " | Y: " << target_y << '\n'; 
+        }
+
+        else {
+            std::cout << "Searching for a target..." << '\n';
         }
 
         cv::imshow("Argus X-1 Vision: Main Source", webcam_main);
@@ -55,7 +59,7 @@ int main() {
         if (webcam_main.empty())
         break;
 
-        if (cv::waitKey(33) == 27) // 1000/33 = 30fps
+        if (cv::waitKey(33) == 27) 
         break;
     }
     cv::destroyAllWindows();
