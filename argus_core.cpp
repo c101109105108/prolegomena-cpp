@@ -70,7 +70,7 @@ void updateTarget(Target& t, double dt) {
 
     float d_y = 0.0f;
     if (dt > 0.0) {
-        d_y = derivative_gain * ((error_y - t.prev_error_y) / dt),.;
+        d_y = derivative_gain * ((error_y - t.prev_error_y) / dt);
     }
     t.pwm_y += (p_y + i_y + d_y);
     t.prev_error_y = error_y;
@@ -93,6 +93,13 @@ int main()
 {
     Target Target1;
 
+    Target1.x = camera_width / 2;
+    Target1.y = camera_length / 2;
+
+    if (gpioInitialise() < 0) {
+        std::cerr << "pigpio error test" << '\n';
+        return 1;
+    }
     auto last_time = std::chrono::steady_clock::now();
 
     while (Target1.x < camera_width && Target1.y < camera_length)
@@ -108,12 +115,12 @@ int main()
         std::cout << '\n' << "X: " << Target1.x << '\n' << "Y: " << Target1.y << '\n' << "PWM_X: " << Target1.pwm_x << " us" << '\n' << "PWM Y: " << Target1.pwm_y << " us" << '\n' << "Elapsed Time: " << dt << " seconds" << '\n' << "--------";
         if (Target1.islocked) std::cout << " [ LOCKED ] --------";
      
-        gpioServo(12, Target1.pwm_x);
-        gpioServo(13, Target1.pwm_y);
-        // initialise trminate gpio, track laser, give value struct corruption, double tracking? laser?, change everything? remove mapping?, fix loop, clean top 
+        gpioServo(12, (int) Target1.pwm_x);
+        gpioServo(13, (int) Target1.pwm_y);
 
         last_time = current_time;
     }
+    gpioTerminate(); //doesnt prevent pigpio initialisation failed error if ctrl c find solution
 
     std::cout << '\n';
     std::cout << '\n' << "--- COMPLETE ---" << '\n';
