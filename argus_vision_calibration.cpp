@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Cemil Uğurcan Güven
+
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <fstream>
