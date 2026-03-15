@@ -3,6 +3,7 @@
 #include <fstream>
 #include <chrono>
 #include <vector>
+#include <cmath>
 
 constexpr int crosshair_gap = 2;
 constexpr int crosshair_length = 6;
@@ -17,8 +18,8 @@ struct VisionState {
     bool laser_detected = false;
     bool locked = false;
     cv::Mat frame;
-    cv::Mat hsv;          
-    cv::Mat target_mask; 
+    cv::Mat hsv;
+    cv::Mat target_mask;
     cv::Mat laser_mask;
 };
 
@@ -149,7 +150,7 @@ int main() {
         return -1;
     }
 
-    std::ofstream data_log("argus_telemetry.csv");
+    std::ofstream data_log("argus_vision_telemetry.csv");
     data_log << "Elapsed Time,Target_X,Target_Y,Target_Area,Laser_X,Laser_Y,Laser_Area" << '\n';
 
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -190,4 +191,4 @@ int main() {
 
     cv::destroyAllWindows();
     return 0;
-} 
+}
