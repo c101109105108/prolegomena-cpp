@@ -1,4 +1,8 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Cemil Uğurcan Güven
+
 #pragma once
+
 #include <opencv2/opencv.hpp>
 
 struct VisionState {
