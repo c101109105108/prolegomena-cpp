@@ -1,6 +1,5 @@
-//CHECK CODE PID  VALUES 0 ADD TRACKING TRY SQUARE BOX LOCKED TRY OPENCV GAME
-//INTEGRAL WINDUP!!!!!!!!!!!!!!!!!!!!!
-//SPDXXXXXXX
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Cemil Uğurcan Güven
 
 #include <iostream>
 #include <chrono>
@@ -13,13 +12,13 @@ constexpr int crosshair_gap = 2;
 constexpr int crosshair_length = 6;
 constexpr int hud_offset = 15;
 
-const int center_pwm = 1365; // and/or 1355 tested center with mirror ds tape attached 10-15*x*x
+const int center_pwm = 1365; 
 const int pwm_min = 520;
 const int pwm_max = 2520;
 
-const float proportional_gain = 0.088f; // Kp -- f = float literal   0.02u0.1u0.01 0.02u0.1u0.01
-const float integral_gain = 0.1f;     // Ki -- f = float literal
-const float derivative_gain = 0.01f;   // Kd -- f = float literal 
+const float proportional_gain = 0.088f; 
+const float integral_gain = 0.1f;     
+const float derivative_gain = 0.01f;   
 
 struct TestState {
 
@@ -106,7 +105,7 @@ void TestControl() {
         std::chrono::duration<double> elapsed = current_time - last_time;
 
         double dt = elapsed.count();
-        if (dt < 0.01) dt = 0.01; // prevent 2e-07 integral kick, better solutions??
+        if (dt < 0.01) dt = 0.01; 
 
         std::chrono::duration<double> total_elapsed = current_time - start_time;
 
@@ -152,7 +151,7 @@ void TestControl() {
         cv::putText(simulation, hud_text, cv::Point(laser_x + hud_offset, laser_y + hud_offset), cv::FONT_HERSHEY_SIMPLEX, 0.3, cv::Scalar(0, 255, 0), 1, cv::LINE_8, false);
 
         cv::imshow("Argus X-1: PID Simulation", simulation);
-        std::this_thread::sleep_for(std::chrono::milliseconds(5)); //delay  
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));  
         if (cv::waitKey(30) == 27) {
             break;
         }
