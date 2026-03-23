@@ -116,4 +116,4 @@ VisionState processFrame(cv::VideoCapture& cap,
     data.laser_mask = webcam_laser_mask.clone();
 
     return data;
-};
+}
