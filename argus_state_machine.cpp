@@ -1,5 +1,5 @@
-//double check DONT FORGET MIN MAX TEST CHANGE ALL VALUES IN FILES
-//double check DONT FORGET MIN MAX TEST CHANGE ALL VALUES IN FILES
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Cemil Uğurcan Güven
 
 #include "argus_vision.h"
 #include "argus_core.h"
@@ -30,7 +30,7 @@ int main() {
 	ArgusState current_state = IDLE;
 
 	if (gpioInitialise() < 0) {
-		std::cerr << "[ARGUS] PIGPIO COULD NOT BE INITIALIZED" << '\n'; //if crashes cout is too late
+		std::cerr << "[ARGUS] PIGPIO COULD NOT BE INITIALIZED" << '\n'; 
 		return -1;
 	}
 
@@ -42,10 +42,10 @@ int main() {
 		return -1;
 	}
 
-	gpioServo(gpio_x, 1365);
-	gpioServo(gpio_y, 1365);
+	gpioServo(gpio_x, 2042);
+	gpioServo(gpio_y, 1938);
 
-	int min_hue = 0, max_hue = 179; //test
+	int min_hue = 0, max_hue = 179; 
 	int min_sat = 0, max_sat = 255;
 	int min_val = 0, max_val = 255;
 
@@ -70,8 +70,8 @@ int main() {
 
 		case IDLE:
 
-			gpioServo(gpio_x, 1365); //double check MIN MAX WRONG DONT FORGET MIN MAX TEST CHANGE ALL VALUES IN FILES
-			gpioServo(gpio_y, 1365);
+			gpioServo(gpio_x, 2042);
+			gpioServo(gpio_y, 1938);
 
 			if (vision_data.laser_detected) {
 
@@ -91,8 +91,8 @@ int main() {
 
 			}
 			else {
-				gpioServo(gpio_x, 1365);
-				gpioServo(gpio_y, 1365);
+				gpioServo(gpio_x, 2042);
+				gpioServo(gpio_y, 1938);
 			}
 			break;
 
@@ -151,7 +151,7 @@ int main() {
 			break;
 		}
 
-		if (!vision_data.frame.empty()) {     // test performance w wo
+		if (!vision_data.frame.empty()) {     
 			cv::imshow("ARGUS X-1: OV9281", vision_data.frame);
 			std::chrono::duration<double> total_elapsed = current_time - start_time;
 			data_log << total_elapsed.count() << "," << vision_data.target_x << "," << vision_data.target_y << "," << vision_data.laser_x << "," << vision_data.laser_y << "," << (vision_data.target_x - vision_data.laser_x) << "," << (vision_data.target_y - vision_data.laser_y) << ","
@@ -174,4 +174,4 @@ int main() {
 
 	return 0;
 
-}
+};
